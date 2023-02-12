@@ -1,0 +1,97 @@
+import java.util.Scanner;
+public class Riva
+{
+	static Scanner in = new Scanner(System.in);
+	public static void main(String[] args)
+	{
+		while(true)
+		{
+			stampaMenu();
+			int scelta = Integer.parseInt(in.nextLine());
+			switch(scelta)
+			{
+				case 1:
+					terzoArrayCrescente();
+				break;
+				case 2:
+					secondoArray();
+				break;
+				default:
+					System.out.println("Scelta errata, riprova!");
+			}
+		}
+	}
+	static void stampaMenu()
+	{
+		System.out.println("1 - Terzo array ordine crescente");
+		System.out.println("2 - Secondo array");
+	}
+	static int [] primoArray = new int [5];
+	static int [] secondoArray = new int [5];
+	static void terzoArrayCrescente()
+	{
+		int [] terzoArray = new int [primoArray.length + secondoArray.length];
+		// Riempio il primo array
+		for (int i=0; i<primoArray.length; i++)
+		{
+			System.out.println("Inserisci numero per il primo array");
+			primoArray[i] = Integer.parseInt(in.nextLine());
+		}
+		// Riempio il secondo array
+		for (int j=0; j<secondoArray.length; j++)
+		{
+			System.out.println("Inserisci numero per il secondo array");
+			secondoArray[j] = Integer.parseInt(in.nextLine());
+		}
+		// Metto insieme primo e secondo array nel terzo
+		for (int i=0; i<primoArray.length; i++)
+		{
+			terzoArray[i] = primoArray[i];
+		}
+		for (int j=0; j<secondoArray.length; j++)
+		{
+			terzoArray[j+primoArray.length] = secondoArray[j];
+		}
+		// Questa parte mette in ordine il terzo array
+		for (int i=0; i<terzoArray.length; i++)	
+		{
+			for (int j=0; j<terzoArray.length-1; j++)
+			{
+				if (terzoArray[i] > terzoArray[j])
+					swap (i, j, terzoArray);
+			}
+		}
+		System.out.println("L'ordine crescente dei valori dei due array è:");
+		for (int m=terzoArray.length-1; m>= 0; m--)
+		{
+			System.out.println(terzoArray[m]);
+		}
+	}
+	public static void swap(int j, int i, int [] terzoArray)
+	{
+		int temp = terzoArray[i];
+		terzoArray[i] = terzoArray[j];
+		terzoArray[j] = temp;
+	}
+	static void secondoArray()
+	{
+		int [] array = new int [10];
+		int [] nuovoArray = new int [array.length];
+		// Riceve valori e memorizza positivi e zero in secondo array 
+		for(int i=0; i<array.length; i++)
+		{
+			System.out.println("Inserisci numero (può essere da -10 a +10)");
+			array[i] =  Integer.parseInt(in.nextLine());
+			if (array[i]>=0)
+			{
+				nuovoArray[i] = array[i];
+			}
+		}
+		// Stampa valori secondo array al contrario
+		System.out.println("L'ordine inverso dei numeri >= 0 è:");
+		for (int m=nuovoArray.length-1; m>=0; m--)
+		{
+			System.out.println(nuovoArray[m]);
+		}
+	}
+}
